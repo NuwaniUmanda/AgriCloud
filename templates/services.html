@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Agri Cloud</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary: #ffa000;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #757575;
+            --light-gray: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .navbar li {
+            margin: 0 1rem;
+        }
+        
+        .navbar a {
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            color: var(--dark);
+            border-radius: 4px;
+        }
+        
+        .navbar a:hover {
+            color: var(--primary);
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+        
+        .login-button, .logout-button {
+            background-color: var(--primary);
+            color: var(--white) !important;
+            border-radius: 4px;
+            padding: 0.5rem 1.5rem !important;
+        }
+        
+        .login-button:hover, .logout-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--white) !important;
+        }
+        
+        /* Services Hero Section */
+        .services-hero {
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .services-hero h1 {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1rem;
+            position: relative;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .services-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+        
+        .services-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--white));
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 4rem 0;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--primary);
+        }
+        
+        .service-content {
+            padding: 2rem;
+        }
+        
+        .service-card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-card h2 i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .service-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .service-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+        
+        .service-button:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        /* Featured Service */
+        .featured-service {
+            grid-column: 1 / -1;
+            background-color: var(--light);
+            border-left: 5px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .featured-service h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-service p {
+            max-width: 800px;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Service Categories */
+        .service-categories {
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .service-categories h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+        
+        footer p {
+            font-size: 1rem;
+        }
+        
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .services-hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services-hero {
+                height: 40vh;
+                min-height: 300px;
+            }
+            
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-hero p {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            .service-content {
+                padding: 1.5rem;
+            }
+            
+            .navbar ul {
+                justify-content: space-around;
+            }
+            
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .service-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="#history">History</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+            <!-- Login/Logout Buttons -->
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}" class="logout-button">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Services Hero Section -->
+    <div class="services-hero">
+        <div>
+            <h1>Our Agricultural Services</h1>
+            <p>Cutting-edge solutions to optimize your farming operations and maximize yields</p>
+        </div>
+    </div>
+
+    <!-- Services Content -->
+    <div class="content-container">
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-content">
+                    <h2><i class="fas fa-seedling"></i> Plant Analysis</h2>
+                    <p>Upload images of your plants and receive detailed analysis on their health, growth stage, and care requirements. Our AI examines leaf color, size, and texture to provide actionable insights.</p>
+                    <a href="{{ url_for('upload') }}" class="service-button">Try Now</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-content">
+                    <h2><i class="fas fa-calendar-alt"></i> Custom Growing Plans</h2>
+                    <p>Get personalized growing plans for your specific plants, climate conditions, and greenhouse setup. We factor in soil type, sunlight exposure, and local weather patterns.</p>
+                    <a href="#" class="service-button">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-content">
+                    <h2><i class="fas fa-bug"></i> Pest & Disease Detection</h2>
+                    <p>Early identification of common pests and diseases with recommended treatment options. Our database recognizes over 200 common agricultural threats with 94% accuracy.</p>
+                    <a href="#" class="service-button">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-content">
+                    <h2><i class="fas fa-chart-line"></i> Harvest Optimization</h2>
+                    <p>AI-powered recommendations for optimal harvest times to maximize yield and quality. We analyze growth patterns and environmental factors to predict the perfect harvest window.</p>
+                    <a href="#" class="service-button">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-content">
+                    <h2><i class="fas fa-tint"></i> Irrigation Planning</h2>
+                    <p>Smart water management solutions that reduce usage while maintaining plant health. Get customized schedules based on soil moisture and weather forecasts.</p>
+                    <a href="#" class="service-button">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-content">
+                    <h2><i class="fas fa-database"></i> Crop Rotation Advisor</h2>
+                    <p>Optimize your field usage with science-backed rotation plans that improve soil health and reduce pest problems year after year.</p>
+                    <a href="#" class="service-button">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 AgriCloud Project. All Rights Reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Cultivating innovation in agriculture</p>
+    </footer>
+</body>
+</html>

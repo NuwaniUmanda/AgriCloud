@@ -1,0 +1,459 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+/* Alert Messages */
+.alert {
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: rgba(51, 51, 51, 0.8);
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.navbar li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+    border-radius: 5px;
+}
+
+/* Login/Logout Buttons */
+.login-button, .logout-button {
+    background-color: #53423f;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.login-button:hover, .logout-button:hover {
+    background-color: #45a049;
+}
+
+/* Hero Section */
+.hero {
+    background: url("greenhouse_img.jpg") no-repeat center center/cover;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 4em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button {
+    display: inline-block;
+    background: #32821C;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button:hover {
+    background: #4FB133;
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about {
+    background: white;
+    padding: 50px 20px;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.feature-box {
+    background: #9FF587;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    min-width: 250px;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Upload Page */
+.upload-container {
+    max-width: 500px;
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.upload-container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.upload-container input[type="file"], 
+.upload-container input[type="email"], 
+.upload-container input[type="password"] {
+    padding: 12px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+.upload-container input[type="file"]:hover,
+.upload-container input[type="email"]:hover, 
+.upload-container input[type="password"]:hover {
+    background-color: #e9e9e9;
+}
+
+.upload-container button {
+    background-color: #2b882e;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+}
+
+.upload-container button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.upload-container a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    background: #90cc90;
+    color: rgb(17, 17, 17);
+    padding: 8px 25px;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: 0.3s ease-in-out;
+}
+
+.upload-container a:hover {
+    background-color: #86bd77;
+}
+
+/* Google button */
+.google-btn {
+    background-color: #4285F4;
+    margin-top: 15px;
+}
+
+.google-btn:hover {
+    background-color: #357ae8;
+}
+
+/* Password hint */
+.password-hint {
+    color: #666;
+    font-size: 0.85em;
+    margin: 5px 0 15px;
+    text-align: left;
+}
+
+/* User info display */
+.user-info {
+    background-color: #e2f2ff;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+/* Plant Information Page */
+.result-container {
+    max-width: 600px;
+    width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.result-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.result-container img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result-container ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.result-container li {
+    font-size: 1.2em;
+    margin: 10px 0;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.result-container a {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    background: #90cc90;
+    color: rgb(17, 17, 17);
+    padding: 8px 25px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+}
+
+.result-container a:hover {
+    background: #86bd77;
+    transform: scale(1.05);
+}
+
+/* About, Services, Contact Pages */
+.page-container {
+    max-width: 800px;
+    width: 90%;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.page-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #32821C;
+}
+
+.page-container h2 {
+    font-size: 1.8em;
+    margin: 25px 0 15px;
+    color: #454545;
+}
+
+.page-container p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Service cards */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.service-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.service-card h3 {
+    color: #32821C;
+    margin-bottom: 15px;
+}
+
+/* Contact form */
+.contact-form {
+    margin-top: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact-form textarea {
+    min-height: 150px;
+}
+
+.contact-form button {
+    background: #32821C;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+    background: #4FB133;
+}
+
+.contact-info {
+    margin-top: 30px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.contact-info h3 {
+    color: #32821C;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-box {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}

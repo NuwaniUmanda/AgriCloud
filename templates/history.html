@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant History | AgriCloud</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary: #ffa000;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #757575;
+            --light-gray: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .navbar li {
+            margin: 0 1rem;
+        }
+        
+        .navbar a {
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            color: var(--dark);
+            border-radius: 4px;
+        }
+        
+        .navbar a:hover {
+            color: var(--primary);
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+        
+        .login-button, .logout-button {
+            background-color: var(--primary);
+            color: var(--white) !important;
+            border-radius: 4px;
+            padding: 0.5rem 1.5rem !important;
+        }
+        
+        .login-button:hover, .logout-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--white) !important;
+        }
+        
+        /* History Container */
+        .history-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .history-container h1 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .history-container h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        /* Plant Grid */
+        .plant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .plant-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .plant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .plant-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-light);
+        }
+        
+        .plant-card-content {
+            padding: 20px;
+        }
+        
+        .plant-card h3 {
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+        }
+        
+        .plant-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .plant-card .date {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        
+        .plant-card .date i {
+            margin-right: 8px;
+            color: var(--primary-light);
+        }
+        
+        .plant-card a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+        
+        .plant-card a:hover {
+            background: var(--primary-dark);
+        }
+        
+        .plant-card a i {
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* Empty State */
+        .no-plants {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(46, 125, 50, 0.05);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .no-plants h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .no-plants p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(46, 125, 50, 0.2);
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(46, 125, 50, 0.25);
+        }
+        
+        .cta-button i {
+            margin-right: 8px;
+        }
+        
+        /* Alerts */
+        .alert {
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        
+        .alert i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .alert-success {
+            background-color: #e8f5e9;
+            color: var(--primary-dark);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .alert-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        footer p {
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .history-container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .history-container h1 {
+                font-size: 2rem;
+            }
+            
+            .plant-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .navbar li {
+                margin: 5px 0;
+            }
+            
+            .history-container {
+                margin: 15px;
+                padding: 15px;
+            }
+            
+            .history-container h1 {
+                font-size: 1.8rem;
+            }
+            
+            .plant-card img {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('history') }}">History</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}" class="logout-button">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- History Section -->
+    <div class="history-container">
+        <h1>Your Plant History</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <i class="fas fa-{% if category == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% if plants %}
+            <div class="plant-grid">
+                {% for plant in plants %}
+                    <div class="plant-card">
+                        <img src="{{ plant.image_url }}" alt="{{ plant.name }}">
+                        <div class="plant-card-content">
+                            <h3>{{ plant.name }}</h3>
+                            <div class="date">
+                                <i class="far fa-calendar-alt"></i>
+                                Uploaded: {{ plant.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </div>
+                            <a href="{{ url_for('result', plant_id=plant.id) }}">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-plants">
+                <h3>No plants in your history yet!</h3>
+                <p>Start by uploading your first plant for analysis</p>
+                <a href="{{ url_for('upload') }}" class="cta-button">
+                    <i class="fas fa-upload"></i> Upload Plant
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 AgriCloud Project. All Rights Reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Cultivating innovation in agriculture</p>
+    </footer>
+</body>
+</html>

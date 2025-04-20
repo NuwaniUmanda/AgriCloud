@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Agri Cloud</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary: #ffa000;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #757575;
+            --light-gray: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .navbar li {
+            margin: 0 1rem;
+        }
+        
+        .navbar a {
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            color: var(--dark);
+            border-radius: 4px;
+        }
+        
+        .navbar a:hover {
+            color: var(--primary);
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+        
+        .login-button, .logout-button {
+            background-color: var(--primary);
+            color: var(--white) !important;
+            border-radius: 4px;
+            padding: 0.5rem 1.5rem !important;
+        }
+        
+        .login-button:hover, .logout-button:hover {
+            background-color: var(--primary-dark);
+            color: var(--white) !important;
+        }
+        
+        /* About Hero Section */
+        .about-hero {
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        .about-hero h1 {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1rem;
+            position: relative;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--white));
+        }
+        
+        /* Mission Statement */
+        .mission-statement {
+            background-color: var(--light);
+            padding: 3rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+            text-align: center;
+            border-left: 5px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .mission-statement:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .mission-statement h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .mission-statement p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        /* About Features */
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+            background-color: var(--white);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        /* Story Section */
+        .story-section {
+            margin: 4rem 0;
+            padding: 2rem 0;
+        }
+        
+        .story-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .story-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+            border-radius: 10px;
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1531492746076-161ca5c126df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .stats-section h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .stat-item {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .stat-item p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+        
+        footer p {
+            font-size: 1rem;
+        }
+        
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 50vh;
+                min-height: 300px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .mission-statement, .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .about-features, .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .navbar ul {
+                justify-content: space-around;
+            }
+            
+            .navbar li {
+                margin: 0.5rem 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .mission-statement h2, .stats-section h2, .story-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .stat-item h3 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('history') }}">History</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}" class="logout-button">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="login-button">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- About Hero Section -->
+    <div class="about-hero">
+        <div>
+            <h1>Growing the Future of Agriculture</h1>
+            <p style="font-size: 1.2rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.6);">Harnessing technology for sustainable farming</p>
+        </div>
+    </div>
+
+    <!-- About Content -->
+    <div class="page-container">
+        <div class="mission-statement">
+            <h2>Our Mission</h2>
+            <p>Agri Cloud empowers farmers and plant enthusiasts with AI-powered insights to optimize plant health and maximize yields through sustainable practices. We're committed to bridging the gap between traditional farming and cutting-edge technology.</p>
+        </div>
+
+        <div class="about-features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Sustainable Farming</h3>
+                <p>We promote eco-friendly practices that reduce water usage and chemical inputs while increasing productivity and maintaining soil health for future generations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                <h3>AI Technology</h3>
+                <p>Our advanced image recognition analyzes plant health in real-time and provides personalized care recommendations tailored to your specific growing conditions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
+                <h3>Global Impact</h3>
+                <p>We're committed to making our technology accessible to farmers worldwide, from smallholders to commercial growers, with multilingual support and localized advice.</p>
+            </div>
+        </div>
+
+        <div class="story-section">
+            <h2>Our Story</h2>
+            <p>Founded in 2025 by agricultural scientists and tech entrepreneurs, Agri Cloud began as a university research project aimed at helping small farmers combat plant diseases. What started as a simple image recognition tool has grown into a comprehensive platform serving thousands of users across 15+ countries. Today, we combine machine learning with agricultural expertise to deliver actionable insights that make farming more efficient, sustainable, and profitable.</p>
+        </div>
+
+        <div class="stats-section">
+            <h2>By The Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Plants Analyzed Daily</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Diagnosis Accuracy Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Countries Served</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Expert Support Available</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 AgriCloud Project. All Rights Reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Cultivating innovation in agriculture</p>
+    </footer>

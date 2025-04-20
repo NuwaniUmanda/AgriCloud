@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Plant Info Section -->
+    <div class="result-container">
+        <h1>Plant Information</h1>
+        
+        <!-- Display the uploaded image - Fixed to use the image_url -->
+        <img src="{{ image_url }}" alt="Plant Image" width="300">
+        
+        <!-- Display plant details - Fixed variable name -->
+        <ul>
+            <li><strong>Name:</strong> {{ plant_info.name }}</li>
+            <li><strong>Soil Type:</strong> {{ plant_info.soil_type }}</li>
+            <li><strong>Sunlight Hours:</strong> {{ plant_info.sunlight_hours }}</li>
+            <li><strong>Water Frequency:</strong> {{ plant_info.water_frequency }}</li>
+            <li><strong>Fertilizer Type:</strong> {{ plant_info.fertilizer_type }}</li>
+            <li><strong>Temperature:</strong> {{ plant_info.temperature }}</li>
+            <li><strong>Humidity:</strong> {{ plant_info.humidity }}</li>
+            <li><strong>Growth Milestone:</strong> {{ plant_info.growth_milestone }}</li>
+        </ul>
+        
+        <a href="{{ url_for('upload') }}">Back to Upload</a>
+    </div>
+</body>
+</html>

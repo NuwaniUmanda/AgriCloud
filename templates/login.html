@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Fixed Firebase imports to latest versions -->
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Login</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        
+        <button id="googleLoginBtn" class="google-btn">Sign in with Google</button>
+        
+        <script>
+            // Safe config handling with default values
+            const firebaseConfig = {
+                apiKey: "{{ firebase_config.get('apiKey', '') }}",
+                authDomain: "{{ firebase_config.get('authDomain', '') }}",
+                projectId: "{{ firebase_config.get('projectId', '') }}",
+                storageBucket: "{{ firebase_config.get('storageBucket', '') }}",
+                messagingSenderId: "{{ firebase_config.get('messagingSenderId', '') }}",
+                appId: "{{ firebase_config.get('appId', '') }}"
+            };
+            
+            // Initialize Firebase with error handling
+            try {
+                firebase.initializeApp(firebaseConfig);
+                
+                // Google login handler
+                document.getElementById('googleLoginBtn').addEventListener('click', () => {
+                    const provider = new firebase.auth.GoogleAuthProvider();
+                    firebase.auth().signInWithPopup(provider)
+                        .then((result) => {
+                            return result.user.getIdToken();
+                        })
+                        .then((token) => {
+                            window.location.href = `/google-login?token=${token}`;
+                        })
+                        .catch((error) => {
+                            console.error('Google login error:', error);
+                            alert('Google login failed: ' + error.message);
+                        });
+                });
+            } catch (error) {
+                console.error('Firebase initialization error:', error);
+                document.getElementById('googleLoginBtn').disabled = true;
+            }
+        </script>
+        
+        <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+    </div>
+</body>
+</html>

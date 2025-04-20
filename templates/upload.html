@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Plant Photo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Upload Page Specific Styles */
+        body {
+            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), 
+                        url("{{ url_for('static', filename='leaves.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .upload-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            border-top: 5px solid #32821C;
+        }
+
+        .upload-container h1 {
+            color: #32821C;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+
+        .user-info {
+            background-color: #f0f8f0;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #454545;
+        }
+
+        .user-info strong {
+            color: #32821C;
+        }
+
+        form {
+            margin: 25px 0;
+        }
+
+        .file-input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 15px;
+            border: 2px dashed #32821C;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .file-input-label:hover {
+            background-color: #f0f8f0;
+            border-color: #4FB133;
+        }
+
+        .file-input-label i {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #32821C;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin: 15px auto;
+            border-radius: 8px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-name-display {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #32821C;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        button[type="submit"] {
+            background-color: #32821C;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4FB133;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(50, 130, 28, 0.3);
+        }
+
+        button[type="submit"]:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .upload-container a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #32821C;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .upload-container a:hover {
+            color: #4FB133;
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .upload-container {
+                padding: 30px 20px;
+            }
+            
+            .upload-container h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <!-- Upload Section -->
+    <div class="upload-container">
+        <h1>Upload Your Plant Photo</h1>
+        
+        <!-- Flash messages display -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- User info display -->
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i> Uploading as: <strong>{{ user_email }}</strong>
+        </div>
+        
+        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+            <div class="file-input-container">
+                <label class="file-input-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    Click to select plant photo
+                    <br>
+                    <span style="font-size: 0.8rem; color: #777;">(JPG, PNG, GIF)</span>
+                    <input type="file" name="photo" id="photoInput" accept="image/*" required>
+                </label>
+                <div id="fileNameDisplay" class="file-name-display"></div>
+            </div>
+            
+            <img id="imagePreview" class="image-preview" alt="Preview of your plant photo">
+            
+            <button type="submit" id="submitButton" disabled>
+                <i class="fas fa-upload"></i> Upload Photo
+            </button>
+        </form>
+        <a href="{{ url_for('home') }}"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const fileNameDisplay = document.getElementById('fileNameDisplay');
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                // Display the file name
+                fileNameDisplay.textContent = `${file.name}`;
+                
+                reader.onload = function(event) {
+                   
+                    
+                    // Enable submit button
+                    document.getElementById('submitButton').disabled = false;
+                };
+                
+                reader.readAsDataURL(file);
+            } else {
+                fileNameDisplay.textContent = '';
+                document.getElementById('imagePreview').style.display = 'none';
+                document.getElementById('submitButton').disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
